@@ -1,0 +1,74 @@
+<p-panel header="Angular Application with PrimeNG - Farzin Mossaed" [toggleable]="false">
+  <p-table
+    [value]="products | async"
+    [paginator]="true"
+    #dt1
+    dataKey="id"
+    [rows]="5"
+    styleClass="p-datatable-striped"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    [globalFilterFields]="['title', 'price', 'category']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <button
+          pButton
+          label="Clear"
+          class="p-button-outlined"
+          icon="pi pi-filter-slash"
+          (click)="clear(dt1)"
+        ></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search keyword"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="title" style="width: 20%">
+          Title <p-sortIcon field="Title"></p-sortIcon>
+        </th>
+        <th pSortableColumn="price" style="width: 20%">
+          Price <p-sortIcon field="Price"></p-sortIcon>
+        </th>
+        <th pSortableColumn="category" style="width: 20%">
+          Category <p-sortIcon field="Category"></p-sortIcon>
+        </th>
+        <th pSortableColumn="rating.rate" style="width: 20%">
+          Rating <p-sortIcon field="Rating"></p-sortIcon>
+        </th>
+        <th>Image</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-products>
+      <tr>
+        <td>{{ products.title }}</td>
+        <td>{{ products.price }}</td>
+        <td>{{ products.category }}</td>
+        <td>
+          <p-rating
+            [ngModel]="math.round(products.rating.rate)"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+        </td>
+        <td>
+          <img
+            src="{{ products.image }}"
+            width="25px"
+            alt="{{ products.image }}"
+          />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>
