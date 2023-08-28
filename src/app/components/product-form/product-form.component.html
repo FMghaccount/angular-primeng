@@ -1,0 +1,139 @@
+<p-dialog
+  header="Header"
+  [(visible)]="showDialog"
+  [modal]="true"
+  [breakpoints]="{ '960px': '85vw' }"
+  [style]="{ width: '50vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeModal()"
+>
+
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">Add Product</span>
+  </ng-template>
+  <p-card>
+    <form [formGroup]="productForm" class="productform">
+      <div class="field flex flex-column">
+        <label for="title" class="block text-xl font-bold flex-auto"
+          >Title</label
+        >
+        <input
+          type="text"
+          class="flex-auto"
+          id="title"
+          pInputText
+          formControlName="title"
+        />
+        <small
+          class="p-error block flex-auto"
+          *ngIf="
+            productForm.controls['title'].invalid &&
+            productForm.controls['title'].touched
+          "
+          >Please enter title</small
+        >
+      </div>
+      <div class="field flex flex-column">
+        <label for="category" class="block text-xl font-bold flex-auto"
+          >Category</label
+        >
+        <input
+          type="text"
+          id="category"
+          pInputText
+          class="flex-auto"
+          formControlName="category"
+        />
+        <small
+          class="p-error block flex-auto"
+          *ngIf="
+            productForm.controls['category'].invalid &&
+            productForm.controls['category'].touched
+          "
+          >Please enter category</small
+        >
+      </div>
+      <div class="field">
+        <label for="price" class="block text-xl font-bold"
+          >Price</label
+        >
+        <p-inputNumber
+          inputId="price"
+          formControlName="price"
+          class="block"
+          [min]="1"
+        ></p-inputNumber>
+        <small
+          class="p-error block flex-auto"
+          *ngIf="
+            productForm.controls['price'].invalid &&
+            productForm.controls['price'].touched
+          "
+          >Please enter price(Atleast 1)</small
+        >
+      </div>
+      <div class="field flex flex-column">
+        <label for="description" class="block text-xl font-bold flex-auto"
+          >Description</label
+        >
+        <textarea
+          id="description"
+          rows="5"
+          cols="40"
+          pInputTextarea
+          class="flex-1"
+          formControlName="description"
+          [autoResize]="true"
+        ></textarea>
+        <small
+          class="p-error block flex-auto"
+          *ngIf="
+            productForm.controls['description'].invalid &&
+            productForm.controls['description'].touched
+          "
+          >Please enter description</small
+        >
+      </div>
+      <div class="field flex flex-column">
+        <label for="image" class="block text-xl font-bold flex-auto"
+          >Image</label
+        >
+        <input
+          type="text"
+          id="image"
+          class="flex-auto"
+          pInputText
+          formControlName="image"
+        />
+        <small
+          class="p-error block flex-auto"
+          *ngIf="
+            productForm.controls['image'].invalid &&
+            productForm.controls['image'].touched
+          "
+          >Please enter image address(URL)</small
+        >
+      </div>
+      <small
+        class="p-error block"
+        *ngIf="productForm.invalid && productForm.touched"
+        >Please fill form</small
+      >
+    </form>
+  </p-card>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="closeModal()"
+      label="cancel"
+      styleClass="p-button-danger p-button-rounded"
+    ></p-button>
+    <p-button
+      (click)="sendRequest()"
+      label="submit"
+      [disabled]="productForm.invalid"
+      styleClass="p-button-success p-button-rounded"
+    ></p-button>
+  </ng-template>
+</p-dialog>

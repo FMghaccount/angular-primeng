@@ -1,0 +1,10 @@
+:host>>> .productform .p-component {
+  width: 100%;
+}
+
+.p-inputwrapper > .p-inputnumber #price {
+  display: block !important;
+}
+.p-inputwrapper > .p-inputnumber {
+  display: block !important;
+}

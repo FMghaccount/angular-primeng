@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +14,20 @@ import { TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
-  declarations: [AppComponent, TestComponent, ProductComponent],
+  declarations: [
+    AppComponent,
+    TestComponent,
+    ProductComponent,
+    ProductFormComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +41,12 @@ import { PanelModule } from 'primeng/panel';
     InputTextModule,
     CardModule,
     PanelModule,
+    DialogModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    InputTextareaModule,
+    ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

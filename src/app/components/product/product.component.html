@@ -1,4 +1,19 @@
-<p-panel header="Angular Application with PrimeNG - Farzin Mossaed" [toggleable]="false">
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-panel
+  header="Angular Application with PrimeNG - Farzin Mossaed"
+  [toggleable]="false"
+>
+  <div class="flex justify-content-between align-items-center">
+    <h2>Products</h2>
+    <p-button
+      label="Add Product"
+      type="button"
+      styleClass="p-button-rounded"
+      (click)="showAddDialog()"
+    ></p-button>
+  </div>
+  <app-product-form [id]="id" [selectedProduct]="selectedProduct" [showDialog]="showDialog" (showToast)="showToast($event)" (closeDialog)="closeModal()"></app-product-form>
   <p-table
     [value]="products | async"
     [paginator]="true"
@@ -17,7 +32,7 @@
         <button
           pButton
           label="Clear"
-          class="p-button-outlined"
+          class="p-button-outlined p-button-rounded"
           icon="pi pi-filter-slash"
           (click)="clear(dt1)"
         ></button>
@@ -47,6 +62,8 @@
           Rating <p-sortIcon field="Rating"></p-sortIcon>
         </th>
         <th>Image</th>
+        <th>Edit</th>
+        <th>Remove</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-products>
@@ -67,6 +84,12 @@
             width="25px"
             alt="{{ products.image }}"
           />
+        </td>
+        <td>
+          <p-button (click)="updateProduct(products)" styleClass="p-button-warning p-button-rounded" icon="pi pi-pencil"></p-button>
+        </td>
+        <td>
+          <p-button (click)="confirm(products.id)" styleClass="p-button-danger p-button-rounded" icon="pi pi-trash"></p-button>
         </td>
       </tr>
     </ng-template>
